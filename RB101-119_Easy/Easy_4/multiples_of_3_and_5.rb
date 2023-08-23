@@ -25,3 +25,24 @@
 #      - add up the multiples_array total
 #      - return the sum
 
+
+def multisum(number)
+  multiples_array = []
+  multiples_3 = 3
+  multiples_5 = 5
+
+  loop do 
+    if multiples_3 <= number
+      multiples_array << multiples_3
+      multiples_3 += 3 
+    elsif multiples_5 <= number
+      multiples_array << multiples_5 if !(multiples_array.include?(multiples_5))
+      multiples_5 += 5
+    else 
+      break 
+    end
+  end 
+  multiples_array.sum
+end 
+
+p multisum(25)
