@@ -27,7 +27,7 @@
 
 def string_to_integer(num_string)
   num_integer = num_string.chars.map { |number| number.ord - 48 }
-  p num_integer.inject{ |a, i| p a * 10 }
+  num_integer.inject{ |a, i| a * 10 + i}
 end 
 
-string_to_integer('123')
+p string_to_integer('123')
