@@ -243,13 +243,37 @@
 
 
 # Problem 15
-arr = [{a: [1, 2, 3]}, {b: [2, 4, 6], c: [3, 6], d: [4]}, {e: [8], f: [6, 10]}]
+# arr = [{a: [1, 2, 3]}, {b: [2, 4, 6], c: [3, 6], d: [4]}, {e: [8], f: [6, 10]}]
 
-# even_hashes = []
-# arr.each do |arr_hash|
-#   even_hashes << arr_hash if arr_hash.all? { |k, v| v.all? { |number| number.even? }}
-# end 
+# # even_hashes = []
+# # arr.each do |arr_hash|
+# #   even_hashes << arr_hash if arr_hash.all? { |k, v| v.all? { |number| number.even? }}
+# # end 
 
-arr.select do |arr_hash|
-  arr_hash.all? { |k, v| v.all? { |number| number.even? } }
-end.tap { |x| p x}
+# arr.select do |arr_hash|
+#   arr_hash.all? { |k, v| v.all? { |number| number.even? } }
+# end.tap { |x| p x}
+
+
+
+
+# Problem 16
+def create_uuid
+  empty_array = []
+  numbers_letters = (0..9).to_a + ('a'..'f').to_a
+  numbers_letters.sample
+  counter = 0
+  loop do 
+    if counter == 8 || counter == 13 || counter == 18 || counter == 23 || counter == 36
+      empty_array << '-'
+    else 
+      empty_array << numbers_letters.sample
+    end 
+    counter += 1
+    break if empty_array.length == 36
+  end 
+  empty_array.join
+end 
+
+
+p create_uuid
