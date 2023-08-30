@@ -23,30 +23,40 @@
 #                     - if not then not a leap year
 #       - Return boolean value of this conditional statement 
 
+
+
+# PART 2 
+# Julian calendar 1752 rules were different. Under the Julian calendar leap years
+# occured any year divisible by 4 
+
 def leap_year?(year)
   mod4_value = year % 4
   mod100_value = year % 100
-  mod400_value = year % 400 
+  mod400_value = year % 400
 
-  if mod4_value == 0 && mod100_value != 0
-    true
-  elsif mod4_value == 0 && mod100_value == 0 
-    mod400_value == 0 
+  if year >= 1752
+    if mod4_value == 0 && mod100_value != 0
+      true
+    elsif mod4_value == 0 && mod100_value == 0 
+      mod400_value == 0 
+    else 
+      false 
+    end 
   else 
-    false 
+    mod4_value == 0 
   end 
 end 
 
-p leap_year?(2016) 
-p leap_year?(2015) 
-p leap_year?(2100) 
-p leap_year?(2400) 
-p leap_year?(240000) 
-p leap_year?(240001) 
-p leap_year?(2000)
-p leap_year?(1900) 
-p leap_year?(1752) 
-p leap_year?(1700) 
-p leap_year?(1) 
-p leap_year?(100) 
-p leap_year?(400) 
+p leap_year?(2016) == true
+p leap_year?(2015) == false
+p leap_year?(2100) == false
+p leap_year?(2400) == true
+p leap_year?(240000) == true
+p leap_year?(240001) == false
+p leap_year?(2000) == true
+p leap_year?(1900) == false
+p leap_year?(1752) == true
+p leap_year?(1700) == true
+p leap_year?(1) == false
+p leap_year?(100) == true
+p leap_year?(400) == true

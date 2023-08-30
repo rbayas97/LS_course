@@ -44,5 +44,3 @@ def multisum(number)
   end 
   multiples_array.sum
 end 
-
-p multisum(25)
