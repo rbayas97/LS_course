@@ -17,6 +17,7 @@
 #            - No consecutive spaces in return string 
 #      - Implicit: 
 #            - None for this problem
+#            - * Return a new string or return the same input string
 
 
 
@@ -36,3 +37,31 @@
 
 
 
+def cleanup(str)
+  initial_clean = ''
+  str_arr = str.split('')
+
+  str_arr.each do |letter|
+    if ('a'..'z').include?(letter)
+      initial_clean << letter
+    else 
+      initial_clean << ' '
+    end
+  end 
+
+  p initial_clean
+
+  final_str = ''
+  initial_clean_arr = initial_clean.split('')
+  initial_clean_arr.each_with_index do |letter, index|
+    if ('a'..'z').include?(letter)
+      final_str << letter
+    elsif letter == ' ' and initial_clean_arr[index+1] != ' '
+      final_str << letter
+    end 
+  end 
+
+  final_str
+end 
+
+p cleanup("-- -wh . at' s my +*2323& line?sa./..n...") 
