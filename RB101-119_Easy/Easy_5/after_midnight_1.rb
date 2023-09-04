@@ -45,3 +45,26 @@
 #      - Convert `mm` and `hh` to strings
 #      - string intropolation and add a ':' in between
 #      - Return the string. 
+
+
+def time_of_day(num)
+  hh_mm_time = ''
+  hh = 0 
+  mm = 0
+
+  mm = num.divmod(60)[1]
+  quotient = num.divmod(60)[0]
+
+  counter = quotient
+  loop do
+    hh += 1
+    hh = 0 if hh == 24
+    counter -= 1
+    break if counter == 0
+  end
+
+  p hh 
+
+end 
+
+time_of_day(800)
