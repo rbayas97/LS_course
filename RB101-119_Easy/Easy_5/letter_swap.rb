@@ -30,12 +30,12 @@
 def swap(str)
   str_array = str.split(' ')
 
-  str_array.map! do |word|
+  str_array.each do |word|
     word[0], word[-1] = word[-1], word[0]
-    word
-  end 
+  end
+  
   str_array.join(' ')
 end 
 
 
-p swap('a')
+p swap('Oh what a wonderful day it is')
