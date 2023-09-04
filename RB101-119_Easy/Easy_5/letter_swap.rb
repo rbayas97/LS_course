@@ -28,10 +28,14 @@
 
 
 def swap(str)
-  swapped_str = ''
   str_array = str.split(' ')
-  p str_array
+
+  str_array.map! do |word|
+    word[0], word[-1] = word[-1], word[0]
+    word
+  end 
+  str_array.join(' ')
 end 
 
 
-swap('Oh what a wonderful day it is')
+p swap('a')
