@@ -26,4 +26,30 @@
 
 
 
-def
+def alphabetic_number_sort(arr)
+  sorted_arr = []
+  words_arr = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
+               'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 
+               'sixteen', 'seventeen', 'eighteen', 'nineteen']
+
+  num_word_hash = create_num_hash(arr, words_arr)
+  sorted_hash = num_word_hash.sort_by {|_, value| value}
+  sorted_hash.each { |element| sorted_arr << element[0]}
+  sorted_arr  
+end 
+
+def create_num_hash(num_arr, word_arr)
+  counter = 0             
+  alphabet_hash = {}
+  loop do 
+    alphabet_hash[num_arr[counter]] = word_arr[counter]
+    counter += 1
+    break if counter == num_arr.size
+  end 
+  alphabet_hash
+end 
+
+p alphabetic_number_sort((0..19).to_a) == [
+  8, 18, 11, 15, 5, 4, 14, 9, 19, 1, 7, 17,
+  6, 16, 10, 13, 3, 12, 2, 0
+]
