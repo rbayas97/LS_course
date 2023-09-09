@@ -22,3 +22,19 @@
 #           - if not append an empty space to the array
 #      - return the vowels_removed array 
 
+
+
+def remove_vowels(arr)
+  arr.map do |word|
+    non_vowel_string = ''
+    word.chars.each do |char|
+      non_vowel_string << char unless ('AEIOUaeiou').include?(char)
+    end
+
+    non_vowel_string
+  end
+end
+
+p remove_vowels(%w(abcdefghijklmnopqrstuvwxyz)) == %w(bcdfghjklmnpqrstvwxyz)
+p remove_vowels(%w(green YELLOW black white))  == %w(grn YLLW blck wht)
+p remove_vowels(%w(ABC AEIOU XYZ))  == ['BC', '', 'XYZ']
