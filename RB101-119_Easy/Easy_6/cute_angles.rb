@@ -46,3 +46,28 @@
 
         # 60 minutes  x   .73 degrees   = 43.8 degree* min   =    43.8 min   *  60 sec
         # 1  degree                         1 degree                             1 min 
+
+
+
+DEGREE = "\xC2\xB0"
+
+def dms(f_num)
+  degree_num = f_num.floor 
+  minutes_num = ((f_num - degree_num) * 60)
+  seconds_num = ((minutes_num - minutes_num.floor) * 60)
+
+  format_deg = degree_num.to_s
+  format_min = sprintf('%.2d',minutes_num.floor)
+  format_sec = sprintf('%.2d',seconds_num.floor)
+
+  formatted_angle = %(#{format_deg}#{DEGREE}#{format_min}'#{format_sec}")
+end
+
+p dms(30) == %(30°00'00")
+p dms(76.73) == %(76°43'48")
+p dms(254.6) == %(254°36'00")
+p dms(93.034773) == %(93°02'05")
+p dms(0) == %(0°00'00")
+p dms(360) == %(360°00'00") || dms(360) == %(0°00'00")
+
+
