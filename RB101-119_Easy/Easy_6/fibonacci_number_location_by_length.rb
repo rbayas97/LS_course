@@ -32,8 +32,8 @@
 #             input argument. We can convert the input to a string and check it's 
 #             length to do this. If conditional is true, break. If not continue looping
 #            - If the loop continues, add 1 to counter_index1 and counterindex2 
-#        - If the loop is broken we then return the index of the fib_series array
-#          and add 1 to it. This is the return value of the method.
+#        - If the loop is broken we then return the index of the last value of
+#          the fib_series array and add 1 to it. This is the return value of the method.
 
 
 def find_fibonacci_index_by_length(num)
