@@ -36,4 +36,26 @@
 #          and add 1 to it. This is the return value of the method.
 
 
-#
+def find_fibonacci_index_by_length(num)
+  fib_series = [1, 1]
+  counter_index1 = 0
+  counter_index2 = 1
+
+  loop do 
+    next_value = fib_series[counter_index1] + fib_series[counter_index2]
+    fib_series << next_value
+    break if next_value.to_s.length == num
+    counter_index1 += 1 
+    counter_index2 += 1
+  end 
+
+  fib_series.index(fib_series[-1]) + 1
+end 
+
+p find_fibonacci_index_by_length(2) == 7          # 1 1 2 3 5 8 13
+p find_fibonacci_index_by_length(3) == 12         # 1 1 2 3 5 8 13 21 34 55 89 144
+p find_fibonacci_index_by_length(10) == 45
+p find_fibonacci_index_by_length(100) == 476
+p find_fibonacci_index_by_length(1000) == 4782
+p find_fibonacci_index_by_length(10000) == 47847
+
