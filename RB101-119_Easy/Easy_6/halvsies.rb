@@ -37,3 +37,24 @@
 #              - Slice the array with slice(middle_point, arr.length)
 #                   - Append this return value to halved_array
 #       - Return halved_array
+
+
+def halvsies(arr)
+  halved_arr = []
+  middle_point = arr.length / 2
+
+  if arr.length.odd?
+    halved_arr << arr.slice(0, middle_point + 1)
+    halved_arr << arr.slice(middle_point + 1, arr.length)
+  else 
+    halved_arr << arr.slice(0,middle_point)
+    halved_arr << arr.slice(middle_point, arr.length)
+  end 
+
+  p halved_arr
+end
+
+p halvsies([1, 2, 3, 4]) == [[1, 2], [3, 4]]
+p halvsies([1, 5, 2, 4, 3]) == [[1, 5, 2], [4, 3]]
+p halvsies([5]) == [[5], []]
+p halvsies([]) == [[], []]
