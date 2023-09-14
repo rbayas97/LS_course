@@ -18,15 +18,45 @@
 
 
 # Data Structure/ Algorithm
-#     - Create a variable called `first_element` and assign it to the first element
-#       of the array.
-#     - Create a variable called `counter` and assign it to 0.
+#     - Create a variable called `index_from_left` and assign it to 0
+#     - Create a variable called `index_from_right` and assignt it to arr.length -1
 #     - Create a loop that will go through the array
-#       - The loop will end when the 1st element is at the last index.
-#     - Create a variable named `popped` and assign it to the return value or list.pop
-#     - Use the unshift method and use popped as the argument.
+#       - The loop will end when `index_from_left is greater than `index_from_right.
+#     - reassign (swap) array values so that arr[index_from_left] is now assigned to
+#       the value of the element at index_from_right and vice versa.
 #     - Continue this until the condition is true.
-#     - This array should be mutated as pop and unshift are mutating methods
+#     - This array should be mutated as as setter methods are mutating. 
 
 
+def reverse!(arr)
+   index_from_left = 0 
+   index_from_right = arr.length - 1 
+
+   loop do
+    break if (index_from_left) > (index_from_right)
+    arr[index_from_left], arr[index_from_right] = arr[index_from_right], arr[index_from_left]
+    index_from_left += 1
+    index_from_right -= 1
+  end
+
+  p arr
+end 
+
+list = [1,2,3,4]
+p result = reverse!(list)
+p result == [4, 3, 2, 1] # true
+p list == [4, 3, 2, 1] # true
+p list.object_id == result.object_id # true
+
+list = %w(a b e d c)
+p reverse!(list) == ["c", "d", "e", "b", "a"] # true
+p list == ["c", "d", "e", "b", "a"] # true
+
+list = ['abc']
+p reverse!(list) == ["abc"] # true
+p list == ["abc"] # true
+
+list = []
+p reverse!(list) == [] # true
+p list == [] # true
 
