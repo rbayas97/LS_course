@@ -28,3 +28,19 @@
 #          - combined_arr << element unless combined_arr.include?(element)
 #      - Each method will get out of the loop after going through both arrays
 #      - return the new array 
+
+
+def merge(arr1, arr2)
+  combined_arr = []
+  arguments_arrs = [arr1, arr2]
+
+  arguments_arrs.each do |arr|
+    arr.each do |element|
+      combined_arr << element unless combined_arr.include?(element)
+    end 
+  end
+
+  combined_arr
+end 
+
+p merge([1, 3, 5], [3, 6, 9]) 
