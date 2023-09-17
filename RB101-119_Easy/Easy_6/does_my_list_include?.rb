@@ -25,3 +25,12 @@
 #           - True means that it is included, false means it is not.
 #
 
+def include?(arr, search_value)
+  arr.any? { |element| element == search_value}
+end 
+
+p include?([1,2,3,4,5], 3) == true
+p include?([1,2,3,4,5], 6) == false
+p include?([], 3) == false
+p include?([nil], nil) == true
+p include?([], nil) == false
