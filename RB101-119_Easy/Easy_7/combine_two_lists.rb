@@ -26,3 +26,18 @@
 #        - Return `combined` array 
 
 
+def interleave(arr1, arr2)
+  combined_arr = []
+  counter = 0
+
+  loop do 
+    combined_arr << arr1[counter]
+    combined_arr << arr2[counter]
+    counter += 1
+    break if counter == arr1.length
+  end 
+
+  combined_arr
+end 
+
+p interleave([1, 2, 3], ['a', 'b', 'c']) == [1, 'a', 2, 'b', 3, 'c']
