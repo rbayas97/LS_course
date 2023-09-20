@@ -33,3 +33,23 @@
 #      - return the string after the join method is invoked
 
 
+def swapcase(str)
+  swapped_str = ''
+  str.split('').each do |word|
+    word.chars.each do |character|
+      if character == character.downcase
+        swapped_str << character.upcase
+      elsif character == character.upcase
+        swapped_str << character.downcase
+      else 
+        swapped_str character
+      end 
+    end 
+  end
+
+  swapped_str
+end 
+
+p swapcase('CamelCase') == 'cAMELcASE'
+p swapcase('Tonight on XYZ-TV') == 'tONIGHT ON xyz-tv'
+
