@@ -31,6 +31,20 @@
 #                  - If the first character in the string is a letter(a-z)
 #                     - apply the capitalize method (use unless here)
 #      - Join the string array together with space seperator to maintain the same value.
-#      - Joining will return a new string as the output requires..
+#      - Joining will return a new string as the output requires.
 
 
+def word_cap(str)
+  string_arr = str.split
+
+  string_arr.map do |word|
+    word.downcase!
+    word.capitalize! if ('a'..'z').include?(word[0])
+    word
+  end.join(' ')
+  
+end
+
+p word_cap('four score and seven') == 'Four Score And Seven'
+p word_cap('the javaScript language') == 'The Javascript Language'
+p word_cap('this is a "quoted" word') == 'This Is A "quoted" Word'
