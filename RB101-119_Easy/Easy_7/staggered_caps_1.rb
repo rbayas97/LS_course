@@ -26,3 +26,21 @@
 #        - If index is even capitalize the letter and append it to stag_caps
 #        - Else make the letter lowercase and append it to stag_caps
 #     - return stag_caps
+
+
+def staggered_case(str)
+  stag_caps = ''
+  str.chars.each_with_index do |char, index|
+    if index.even?
+      stag_caps << char.upcase
+    else 
+      stag_caps << char.downcase
+    end 
+  end 
+
+  stag_caps
+end 
+
+p staggered_case('I Love Launch School!') == 'I LoVe lAuNcH ScHoOl!'
+p staggered_case('ALL_CAPS') == 'AlL_CaPs'
+p staggered_case('ignore 77 the 444 numbers') == 'IgNoRe 77 ThE 444 NuMbErS'
