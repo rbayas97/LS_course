@@ -42,7 +42,7 @@ def swapcase(str)
       elsif character == character.upcase
         swapped_str << character.downcase
       else 
-        swapped_str character
+        swapped_str << character
       end 
     end 
   end
