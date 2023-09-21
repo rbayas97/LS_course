@@ -24,7 +24,6 @@
 #         - assign this to variable name `average`
 #      - Invoke puts method passing in `average` as the argument
 
-
 def show_multiplicative_average(arr)
   multiplication_total = 1
 
