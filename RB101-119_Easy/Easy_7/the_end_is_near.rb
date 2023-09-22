@@ -16,3 +16,11 @@
 #    - Take input string and break it up with split, which will give us array of strings
 #      with each element being sepereated by the spaces in the string
 #    - Return the second to last element in the string with array referencing
+
+
+def penultimate(str)
+  str.split[-2]
+end 
+
+p penultimate('last word') == 'last'
+p penultimate('Launch School is great!') == 'is'
