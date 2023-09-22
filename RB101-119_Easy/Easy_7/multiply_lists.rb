@@ -28,3 +28,20 @@
 #      - Break out of the loop when counter is equal to the size of either first_arr
 #        or second_arr
 #      - Return multiplied_arr
+
+
+def multiply_list(arr1, arr2)
+  product_arr = []
+  counter = 0
+
+  loop do
+    product_value = arr1[counter] * arr2[counter]
+    product_arr << product_value
+    counter += 1
+    break if counter == arr1.size
+  end
+
+  product_arr
+end 
+
+p multiply_list([3, 5, 7], [9, 10, 11]) #== [27, 50, 77]
