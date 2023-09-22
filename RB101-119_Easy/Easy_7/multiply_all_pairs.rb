@@ -33,20 +33,20 @@
 #       - Use the sort method to and sort `multiple_pairs`. This will be the last line
 #         and this will be the return value of the method.
 
-# def multiply_all_pairs(arr1, arr2)
-#   multiple_pairs = []
+def multiply_all_pairs(arr1, arr2)
+  multiple_pairs = []
 
-#   arr1.each do |element|
-#     counter = 0 
-#     loop do 
-#       product = element * arr2[counter]
-#       multiple_pairs << product 
-#       counter += 1 
-#       break if counter == arr2.size
-#     end 
-#   end 
+  arr1.each do |element|
+    counter = 0 
+    loop do 
+      product = element * arr2[counter]
+      multiple_pairs << product 
+      counter += 1 
+      break if counter == arr2.size
+    end 
+  end 
   
-#   multiple_pairs.sort
-# end
+  multiple_pairs.sort
+end
 
-# p multiply_all_pairs([2, 4], [4, 3, 1, 2]) # == [2, 4, 4, 6, 8, 8, 12, 16]
+p multiply_all_pairs([2, 4], [4, 3, 1, 2]) # == [2, 4, 4, 6, 8, 8, 12, 16]
