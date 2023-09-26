@@ -39,12 +39,12 @@ end
 
 def initialize_board
   new_board = {}
-  (1..9).each {|num| new_board[num] = INITIAL_MARKER}
+  (1..9).each { |num| new_board[num] = INITIAL_MARKER }
   new_board
 end
 
 def empty_squares(brd)
-  brd.keys.select{|num| brd[num] == INITIAL_MARKER}
+  brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end 
 
 def player_places_piece!(brd)
@@ -80,7 +80,7 @@ def detect_winner(brd)
     if brd[line[0]] == PLAYER_MARKER && 
        brd[line[1]] == PLAYER_MARKER &&
        brd[line[2]] == PLAYER_MARKER
-       return 'Player'
+        return 'Player'
     elsif 
       brd[line[0]] == COMPUTER_MARKER &&
       brd[line[1]] == COMPUTER_MARKER && 
