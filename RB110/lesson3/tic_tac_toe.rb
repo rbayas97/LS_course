@@ -50,7 +50,7 @@ end
 def player_places_piece!(brd)
   square = ''
   loop do 
-    prompt "Choose a square (#{joinor(empty_squares(brd))}):"
+    prompt "Choose a position to place a piece #{joinor(empty_squares(brd))}:"
     square = gets.chomp.to_i
     break if empty_squares(brd).include?(square)
     prompt "Sorry this is not a valid choice."
@@ -107,8 +107,11 @@ def joinor(arr, delimiter = ', ', word_choice = 'or')
 
   last_choice = arr[-1]
 
-  puts "#{choices_before_last}#{word_choice} #{last_choice}"
+  "#{choices_before_last}#{word_choice} #{last_choice}"
 end
+
+player_score = 0
+computer_score = 0
 
 loop do 
   board = initialize_board
@@ -125,12 +128,17 @@ loop do
 
   display_board(board)
 
-  if someone_won?(board)
+  if someone_won?(board) && detect_winner(board) == 'Player'
     prompt "#{detect_winner(board)} won!"
+    player_score += 1
+  elsif someone_won?(board) && detect_winner(board) == 'Computer'
+    prompt "#{detect_winner(board)} won!"
+    computer_score += 1
   else 
     prompt "It's a tie!"
   end 
 
+  prompt "Player score: #{player_score} Computer score: #{computer_score}"
   prompt "Play again? (y or n)"
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
