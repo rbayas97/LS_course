@@ -50,7 +50,7 @@ end
 def player_places_piece!(brd)
   square = ''
   loop do 
-    prompt "Choose a square (#{empty_squares(brd).join(', ')}):"
+    prompt "Choose a square (#{joinor(empty_squares(brd))}):"
     square = gets.chomp.to_i
     break if empty_squares(brd).include?(square)
     prompt "Sorry this is not a valid choice."
@@ -89,7 +89,26 @@ def detect_winner(brd)
     end  
   end
   nil
-end 
+end
+
+def joinor(arr, delimiter = ', ', word_choice = 'or')
+  choices_before_last = ''
+  counter = 0
+
+  loop do
+    if arr.length == 2
+      choices_before_last += "#{arr[counter]} "
+    else
+      choices_before_last += "#{arr[counter]}#{delimiter}"
+    end 
+    counter += 1 
+    break if counter == arr.length-1
+  end
+
+  last_choice = arr[-1]
+
+  puts "#{choices_before_last}#{word_choice} #{last_choice}"
+end
 
 loop do 
   board = initialize_board
