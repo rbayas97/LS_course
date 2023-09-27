@@ -102,6 +102,14 @@ def joinor(arr, delimiter = ', ', word= 'or')
   end
 end
 
+def determine_winner(player_score)
+  if player_score == 5
+    prompt "You won 5 times. The computer is defeated."
+  else
+    prompt "The computer wone 5 times. You are defeated."
+  end 
+end 
+
 player_score = 0
 computer_score = 0
 loop do
@@ -131,11 +139,7 @@ loop do
 
   prompt "Player score: #{player_score} Computer score: #{computer_score}"
   if player_score == 5 || computer_score == 5
-    if player_score == 5
-      prompt "You won 5 times. The computer is defeated."
-    else
-      prompt "The computer wone 5 times. You are defeated."
-    end 
+    determine_winner(player_score)
     break
   else 
     prompt "Play again? (y or n)"
