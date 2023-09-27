@@ -104,7 +104,7 @@ end
 
 player_score = 0
 computer_score = 0
-loop do 
+loop do
   board = initialize_board
 
   loop do
@@ -125,14 +125,23 @@ loop do
   elsif someone_won?(board) && detect_winner(board) == 'Computer'
     prompt "#{detect_winner(board)} won!"
     computer_score += 1
-  else 
+  else
     prompt "It's a tie!"
-  end 
+  end
 
   prompt "Player score: #{player_score} Computer score: #{computer_score}"
-  prompt "Play again? (y or n)"
-  answer = gets.chomp
-  break unless answer.downcase.start_with?('y')
+  if player_score == 5 || computer_score == 5
+    if player_score == 5
+      prompt "You won 5 times. The computer is defeated."
+    else
+      prompt "The computer wone 5 times. You are defeated."
+    end 
+    break
+  else 
+    prompt "Play again? (y or n)"
+    answer = gets.chomp
+    break unless answer.downcase.start_with?('y')
+  end 
 end 
 
 prompt "Thanks for playing Tic Tac Toe. Good bye!"
