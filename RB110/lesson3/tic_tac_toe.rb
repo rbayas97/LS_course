@@ -104,8 +104,10 @@ end
 
 def determine_winner(player_score)
   if player_score == 5
+    prompt "-------------WINNNER-------------"
     prompt "You won 5 times. The computer is defeated."
   else
+    prompt "-------------LOSER--------------"
     prompt "The computer wone 5 times. You are defeated."
   end 
 end 
