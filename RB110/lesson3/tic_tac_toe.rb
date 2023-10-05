@@ -63,12 +63,19 @@ def player_places_piece!(brd)
 end
 
 def computer_places_piece!(brd)
-  square = empty_squares(brd).sample 
+  square = nil
 
   potential_threat = WINNING_LINES.select do |line|
-                     line.count {|element| brd[element] == PLAYER_MARKER} == 2
+                     line.count {|number| brd[number] == PLAYER_MARKER} == 2 && 
+                     line.count { |number| brd[number] == COMPUTER_MARKER} != 1
                      end
-  p potential_threat
+  if potential_threat.length >= 1 
+    p potential_threat
+    square = potential_threat[0].select { |num| brd[num] != PLAYER_MARKER}[0]
+
+  else 
+    square = empty_squares(brd).sample 
+  end 
 
   brd[square] = COMPUTER_MARKER
 end
