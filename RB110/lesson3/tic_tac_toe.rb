@@ -67,16 +67,31 @@ def computer_places_piece!(brd)
   brd[square] = COMPUTER_MARKER
 end
 
+def determine_threats(brd)
+  WINNING_LINES.select do |line|
+    line.count { |number| brd[number] == PLAYER_MARKER } == 2 && 
+    line.count { |number| brd[number] == COMPUTER_MARKER } != 1
+  end
+end 
+
+def determine_attacks(brd)
+  WINNING_LINES.select do |line|
+    line.count { |number| brd[number] == COMPUTER_MARKER} == 2 &&
+    line.count { |number| brd[number] == PLAYER_MARKER} != 1
+  end
+end 
+
 def determine_computer_move(brd)
-  potential_threat = WINNING_LINES.select do |line|
-                     line.count {|number| brd[number] == PLAYER_MARKER} == 2 && 
-                     line.count { |number| brd[number] == COMPUTER_MARKER} != 1
-                     end
-  if potential_threat.length >= 1
+  potential_threat = determine_threats(brd)
+  computer_winning_position = determine_attacks(brd)
+
+  if potential_threat.length >= 1 && computer_winning_position.length == 0 
     potential_threat[0].select { |num| brd[num] != PLAYER_MARKER }[0]
+  elsif computer_winning_position.length >= 1 
+    computer_winning_position[0].select { |num| brd[num] != COMPUTER_MARKER}[0]
   else 
     empty_squares(brd).sample
-  end 
+  end
 end 
 
 def board_full?(brd)
