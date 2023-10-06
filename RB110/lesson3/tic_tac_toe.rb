@@ -139,12 +139,24 @@ def determine_winner(player_score)
     prompt "-------------LOSER!---------------"
     prompt "The computer wone 5 times. You are defeated."
   end 
+end
+
+def determine_first_player
+  choice = ''
+  prompt "Who goes first, you or the computer? Enter 'me' or 'ai' "
+  loop do 
+    choice = gets.chomp.downcase
+    break if choice == 'me' || choice == 'ai'
+    prompt "Invalid choice. Enter 'me' or 'ai'"
+  end 
+  choice 
 end 
 
 player_score = 0
 computer_score = 0
 loop do
   board = initialize_board
+  first_move = determine_first_player
 
   loop do
     display_board(board)
