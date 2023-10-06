@@ -143,7 +143,7 @@ end
 
 def determine_first_player
   choice = ''
-  prompt "Who goes first, you or the computer? Enter 'me' or 'ai' "
+  prompt "Who should go first, you or the computer? Enter 'me' or 'ai':"
   loop do 
     choice = gets.chomp.downcase
     break if choice == 'me' || choice == 'ai'
@@ -158,15 +158,26 @@ loop do
   board = initialize_board
   first_move = determine_first_player
 
-  loop do
-    display_board(board)
+  if first_move == 'me'
+    loop do
+      display_board(board)
 
-    player_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
+      player_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
 
-    computer_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
-  end
+      computer_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+    end
+  else
+    loop do
+      computer_places_piece!(board)
+      display_board(board)
+      break if someone_won?(board) || board_full?(board)
+
+      player_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+    end 
+  end 
 
   display_board(board)
 
@@ -184,7 +195,7 @@ loop do
   if player_score == 5 || computer_score == 5
     determine_winner(player_score)
     break
-  else 
+  else
     prompt "Play again? (y or n)"
     answer = gets.chomp
     break unless answer.downcase.start_with?('y')
