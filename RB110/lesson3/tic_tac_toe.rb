@@ -87,8 +87,10 @@ def determine_computer_move(brd)
 
   if potential_threat.length >= 1 && computer_winning_position.length == 0 
     potential_threat[0].select { |num| brd[num] != PLAYER_MARKER }[0]
-  elsif computer_winning_position.length >= 1 
-    computer_winning_position[0].select { |num| brd[num] != COMPUTER_MARKER}[0]
+  elsif computer_winning_position.length > 0 
+    computer_winning_position[0].select { |num| brd[num] != COMPUTER_MARKER }[0]
+  elsif brd[5] == ' '
+    5
   else 
     empty_squares(brd).sample
   end
