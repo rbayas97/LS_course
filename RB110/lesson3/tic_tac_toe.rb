@@ -150,13 +150,21 @@ def determine_first_player
     prompt "Invalid choice. Enter 'me' or 'ai'"
   end 
   choice 
+end
+
+def computer_chooses_first_move
+  choice = ['yes', 'no'].sample
+  if choice == 'no'
+    prompt "The computer wants you to decide who should go first."
+  end 
+  choice
 end 
 
 player_score = 0
 computer_score = 0
 loop do
   board = initialize_board
-  first_move = determine_first_player
+  first_move = determine_first_player if computer_chooses_first_move == 'no'
 
   if first_move == 'me'
     loop do
