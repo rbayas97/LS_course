@@ -160,6 +160,22 @@ def computer_chooses_first_move
   choice
 end 
 
+def place_piece!(brd, player)
+  if player == 'me'
+    player_places_piece!(brd)
+  else
+    computer_places_piece!(brd)
+  end 
+end
+
+def alternate_player(player)
+  if player == 'me'
+    player = 'ai'
+  else 
+    player = 'me'
+  end
+end 
+
 player_score = 0
 computer_score = 0
 loop do
@@ -168,25 +184,21 @@ loop do
                  determine_first_player
                else 
                  'ai'
-               end 
+               end
+  current_player = first_move
 
   if first_move == 'me'
     loop do
       display_board(board)
-
-      player_places_piece!(board)
-      break if someone_won?(board) || board_full?(board)
-
-      computer_places_piece!(board)
+      place_piece!(board, current_player)
+      current_player = alternate_player(current_player)
       break if someone_won?(board) || board_full?(board)
     end
   else
     loop do
-      computer_places_piece!(board)
+      place_piece!(board, current_player)
+      current_player = alternate_player(current_player)
       display_board(board)
-      break if someone_won?(board) || board_full?(board)
-
-      player_places_piece!(board)
       break if someone_won?(board) || board_full?(board)
     end 
   end 
