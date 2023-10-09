@@ -164,7 +164,11 @@ player_score = 0
 computer_score = 0
 loop do
   board = initialize_board
-  first_move = determine_first_player if computer_chooses_first_move == 'no'
+  first_move = if computer_chooses_first_move == 'no'
+                 determine_first_player
+               else 
+                 'ai'
+               end 
 
   if first_move == 'me'
     loop do
