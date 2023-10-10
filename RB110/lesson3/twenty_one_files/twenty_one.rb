@@ -11,8 +11,8 @@
 
 
 DECK_VALUES = { 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 
-         9 => 9, 10 => 10, 'J' => 'J', 'Q' => 'Q', 'K' => 'K',
-         'A' => 'A'}
+         9 => 9, 10 => 10, 'J' => 10, 'Q' => 10, 'K' => 10,
+         'A' => 1}
 
 
 def display_card(num1, num2)
@@ -34,5 +34,6 @@ def initialize_deck
 end
 
 playing_deck = initialize_deck
+p playing_deck
 display_card(playing_deck.keys.sample, playing_deck.keys.sample)
 
