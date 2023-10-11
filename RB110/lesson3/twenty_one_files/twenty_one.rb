@@ -78,9 +78,11 @@ computer_cards = draw_initial_hand!(playing_deck)
 display_card(user_cards[0], user_cards[1])
 display_card(computer_cards[0], '?')
 
+user_hand_total = calculate_hand(user_cards)
 
 loop do 
-  if calculate_hand(user_cards) < 21
+  if user_hand_total < 21
+    puts "Your current hand is #{user_hand_total}"
     puts 'Hit or Stay?'
     answer = gets.chomp.downcase
     if answer == 'hit'
