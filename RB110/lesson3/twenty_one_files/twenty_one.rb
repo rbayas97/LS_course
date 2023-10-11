@@ -1,5 +1,5 @@
 # 1. Initialize deck
-# 2. Deal cards to playerand dealer
+# 2. Deal cards to player and dealer
 # 3. Player: hit or stay
 #    - Repeat until bust or 'stay'
 # 4. If player bust, dealer wins.
@@ -15,13 +15,13 @@ DECK_VALUES = { 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8,
          'A' => 1}
 
 
-def display_card(num1, num2)
-  spaces = num1.to_s.length == 1 ? 3 : 2
-  spaces_2 = num2.to_s.length == 1 ? 3 : 2
+def display_card(card1, card2)
+  spaces = card1.to_s.length == 1 ? 3 : 2
+  spaces_2 = card2.to_s.length == 1 ? 3 : 2
   puts '+--------+'                       + ' ' +  '+--------+'  
   puts '|        |'                       + ' ' +  '|        |'
   puts '|        |'                       + ' ' +  '|        |'
-  puts "|    #{num1}" + ' ' * spaces + '|'+ ' ' +  "|    #{num2}" + ' ' * spaces_2 + '|'
+  puts "|    #{card1}" + ' ' * spaces + '|'+ ' ' +  "|    #{card2}" + ' ' * spaces_2 + '|'
   puts '|        |'                       + ' ' +  '|        |'
   puts '|        |'                       + ' ' +  '|        |'
   puts '+--------+'                       + ' ' +  '+--------+'  
@@ -42,18 +42,63 @@ def draw_initial_hand!(cards)
     hand << card
   end 
   hand 
-end 
+end
 
-# Must implement draw_initial_hand to subtract from deck when intial hand is drawn based off
-# the cards the player and ai received. 
+def draw_next_card!(deck, player_cards)
+  card = deck.keys.sample
+  player_cards << card
+  deck.map { |key, value| deck[key][1] -= 1 if key == card }
+end
+
+def determine_ace_value(total, current_hand)
+  if total < 21 && current_hand.count('A') == 1 
+    ace = 11
+  else 
+    ace = 1
+  end 
+end 
+    
+def calculate_hand(player_cards)
+  total = 0
+  player_cards.each do |card|
+    if card == 'A'
+      ace_value = determine_ace_value(total, player_cards)
+      total += ace_value
+    else 
+      total += DECK_VALUES[card]
+    end 
+  end
+  total
+end
 
 playing_deck = initialize_deck
-player_cards = draw_initial_hand!(playing_deck)
+user_cards = draw_initial_hand!(playing_deck)
 computer_cards = draw_initial_hand!(playing_deck)
 
-display_card(player_cards[0], player_cards[1])
-display_card(computer_cards[0], computer_cards[1])
+display_card(user_cards[0], user_cards[1])
+display_card(computer_cards[0], '?')
 
-p playing_deck
+
+loop do 
+  if calculate_hand(user_cards) < 21
+    puts 'Hit or Stay?'
+    answer = gets.chomp.downcase
+    if answer == 'hit'
+      draw_next_card!(playing_deck, user_cards)
+      p user_cards
+    elsif answer == 'stay'
+      break
+    else 
+      puts 'Wrong choice. Please enter Hit or Stay'
+    end 
+  else 
+    puts 'BUST! You went over 21!'
+    break
+  end 
+end 
+
+
+
+
 
 
