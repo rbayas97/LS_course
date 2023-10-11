@@ -1,5 +1,5 @@
 # 1. Initialize deck
-# 2. Deal cards to player and dealer
+# 2. Deal cards to playerand dealer
 # 3. Player: hit or stay
 #    - Repeat until bust or 'stay'
 # 4. If player bust, dealer wins.
@@ -21,7 +21,7 @@ def display_card(num1, num2)
   puts '+--------+'                       + ' ' +  '+--------+'  
   puts '|        |'                       + ' ' +  '|        |'
   puts '|        |'                       + ' ' +  '|        |'
-  puts "|    #{num1}" + ' ' * spaces + '|' + ' ' +  "|    #{num2}" + ' ' * spaces_2 + '|'
+  puts "|    #{num1}" + ' ' * spaces + '|'+ ' ' +  "|    #{num2}" + ' ' * spaces_2 + '|'
   puts '|        |'                       + ' ' +  '|        |'
   puts '|        |'                       + ' ' +  '|        |'
   puts '+--------+'                       + ' ' +  '+--------+'  
@@ -33,7 +33,27 @@ def initialize_deck
   deck_count 
 end
 
+def draw_initial_hand!(cards)
+  hand = []
+  card = nil
+  2.times do 
+    card = cards.keys.sample
+    cards.map { |key, value| cards[key][1] -= 1 if key == card }
+    hand << card
+  end 
+  hand 
+end 
+
+# Must implement draw_initial_hand to subtract from deck when intial hand is drawn based off
+# the cards the player and ai received. 
+
 playing_deck = initialize_deck
+player_cards = draw_initial_hand!(playing_deck)
+computer_cards = draw_initial_hand!(playing_deck)
+
+display_card(player_cards[0], player_cards[1])
+display_card(computer_cards[0], computer_cards[1])
+
 p playing_deck
-display_card(playing_deck.keys.sample, playing_deck.keys.sample)
+
 
