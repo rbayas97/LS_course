@@ -12,7 +12,7 @@
 
 DECK_VALUES = { 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 
          9 => 9, 10 => 10, 'J' => 10, 'Q' => 10, 'K' => 10,
-         'A' => 1}
+         'A' => 11}
 
 
 def display_card(card1, card2)
@@ -48,8 +48,8 @@ def draw_next_card!(deck, player_cards)
   deck.map { |key, value| deck[key][1] -= 1 if key == card }
 end
 
-def determine_ace_value(total, current_hand)
-  if total < 21 && current_hand.count('A') == 1 
+def determine_ace_value(total, ace)
+  if total + DECK_VALUES[ace] <= 21
     ace = 11
   else 
     ace = 1
@@ -60,7 +60,7 @@ def calculate_hand(player_cards)
   total = 0
   player_cards.each do |card|
     if card == 'A'
-      ace_value = determine_ace_value(total, player_cards)
+      ace_value = determine_ace_value(total, card)
       total += ace_value
     else 
       total += DECK_VALUES[card]
@@ -80,7 +80,7 @@ display_card(computer_cards[0], '?')
 
 loop do 
   user_hand_total = calculate_hand(user_cards)
-  if user_hand_total < 21
+  if user_hand_total <= 21
     puts "Your current hand is #{user_hand_total}"
     puts 'Hit or Stay?'
     answer = gets.chomp.downcase
@@ -97,10 +97,3 @@ loop do
     break
   end 
 end 
-
-
-
-
-
-
-
