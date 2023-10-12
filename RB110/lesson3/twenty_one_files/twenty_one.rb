@@ -18,13 +18,11 @@ DECK_VALUES = { 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8,
 def display_card(card1, card2)
   spaces = card1.to_s.length == 1 ? 3 : 2
   spaces_2 = card2.to_s.length == 1 ? 3 : 2
-  puts '+--------+'                       + ' ' +  '+--------+'  
-  puts '|        |'                       + ' ' +  '|        |'
-  puts '|        |'                       + ' ' +  '|        |'
-  puts "|    #{card1}" + ' ' * spaces + '|'+ ' ' +  "|    #{card2}" + ' ' * spaces_2 + '|'
-  puts '|        |'                       + ' ' +  '|        |'
-  puts '|        |'                       + ' ' +  '|        |'
-  puts '+--------+'                       + ' ' +  '+--------+'  
+  puts '+-------+'                        + ' ' +  '+-------+'  
+  puts '|       |'                        + ' ' +  '|       |'
+  puts "|   #{card1}" + ' ' * spaces +'|' + ' ' +  "|   #{card2}" + ' ' * spaces_2 + '|'
+  puts '|       |'                        + ' ' +  '|       |'                       
+  puts '+-------+'                        + ' ' +  '+-------+'  
 end
 
 def initialize_deck
@@ -75,12 +73,13 @@ playing_deck = initialize_deck
 user_cards = draw_initial_hand!(playing_deck)
 computer_cards = draw_initial_hand!(playing_deck)
 
+puts "Your Hand:"
 display_card(user_cards[0], user_cards[1])
+puts "Dealer Hand:"
 display_card(computer_cards[0], '?')
 
-user_hand_total = calculate_hand(user_cards)
-
 loop do 
+  user_hand_total = calculate_hand(user_cards)
   if user_hand_total < 21
     puts "Your current hand is #{user_hand_total}"
     puts 'Hit or Stay?'
@@ -98,6 +97,7 @@ loop do
     break
   end 
 end 
+
 
 
 
