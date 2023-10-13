@@ -104,3 +104,10 @@ loop do
     break
   end 
 end 
+
+dealer_hand_total = 0 
+loop do
+  dealer_hand_total = calculate_hand(dealer_cards)
+  break if dealer_hand_total >= 17
+  draw_next_card!(playing_deck, dealer_cards)
+end
