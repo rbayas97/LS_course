@@ -75,6 +75,11 @@ def ask_to_hit_or_stay(total)
   gets.chomp.downcase
 end 
 
+def ask_to_play_again
+  puts "Play again? (y or n)"
+  answer = gets.chomp
+end 
+
 loop do 
   playing_deck = initialize_deck
   puts "Would you like to play?"
@@ -88,7 +93,8 @@ loop do
 
 
   user_hand_total = 0
-  dealer_hand_total = 0  
+  dealer_hand_total = 0
+  player_bust = false
   loop do
     user_hand_total = calculate_hand(user_cards)
     if user_hand_total <= 21
@@ -102,10 +108,16 @@ loop do
       end 
     else 
       puts 'BUST! You went over 21!'
+      player_bust = true
       break
     end
-    p user_cards, user_hand_total
   end
+
+  if player_bust == true
+    play_another_game = ask_to_play_again
+    break unless play_another_game.downcase.start_with?('y')
+    next
+  end 
 
   loop do
     dealer_hand_total = calculate_hand(dealer_cards)
@@ -114,9 +126,8 @@ loop do
   end 
   p dealer_cards
   
-  puts "Play again? (y or n)"
-  answer = gets.chomp
-  break unless answer.downcase.start_with?('y')
+  play_another_game = ask_to_play_again
+  break unless play_another_game.downcase.start_with?('y')
 end 
 
 
