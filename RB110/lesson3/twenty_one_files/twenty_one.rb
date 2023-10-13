@@ -71,7 +71,7 @@ end
 
 def ask_to_hit_or_stay(total)
   puts "Your hand is #{total}"
-  puts "Hit or Stay"
+  puts "Hit or Stay?"
   gets.chomp.downcase
 end 
 
@@ -86,28 +86,36 @@ display_card(user_cards[0], user_cards[1])
 puts "Dealer Hand:"
 display_card(dealer_cards[0], '?')
 
-user_hand_total = 0 
+user_hand_total = 0
+dealer_hand_total = 0 
 loop do 
-  user_hand_total = calculate_hand(user_cards)
-  if user_hand_total <= 21
-    answer = ask_to_hit_or_stay(user_hand_total)
-    if answer == 'hit'
-      draw_next_card!(playing_deck, user_cards)
-      p user_cards
-    elsif answer == 'stay'
-      break
+  loop do 
+    user_hand_total = calculate_hand(user_cards)
+    if user_hand_total <= 21
+      answer = ask_to_hit_or_stay(user_hand_total)
+      if answer == 'hit'
+        draw_next_card!(playing_deck, user_cards)
+      elsif answer == 'stay'
+        break
+      else 
+        puts 'Wrong choice. Please enter Hit or Stay?'
+      end 
     else 
-      puts 'Wrong choice. Please enter Hit or Stay?'
-    end 
-  else 
-    puts 'BUST! You went over 21!'
-    break
-  end 
+      puts 'BUST! You went over 21!'
+      break
+    end
+    p user_cards
+  end
+
+  loop do
+    dealer_hand_total = calculate_hand(dealer_cards)
+    break if dealer_hand_total >= 17
+    draw_next_card!(playing_deck, dealer_cards)
+  end
+  
+  puts 'Would you like to play again? (y or n)'
+  play_again = gets.chomp()
+  break unless play_again.downcase.start_with?('y')
 end 
 
-dealer_hand_total = 0 
-loop do
-  dealer_hand_total = calculate_hand(dealer_cards)
-  break if dealer_hand_total >= 17
-  draw_next_card!(playing_deck, dealer_cards)
-end
+
