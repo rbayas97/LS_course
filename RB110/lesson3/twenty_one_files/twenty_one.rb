@@ -82,7 +82,6 @@ end
 
 loop do 
   playing_deck = initialize_deck
-  puts "Would you like to play?"
   user_cards = draw_initial_hand!(playing_deck)
   dealer_cards = draw_initial_hand!(playing_deck)
 
@@ -91,10 +90,10 @@ loop do
   puts "Dealer Hand:"
   display_card(dealer_cards[0], '?')
 
-
   user_hand_total = 0
   dealer_hand_total = 0
   player_bust = false
+
   loop do
     user_hand_total = calculate_hand(user_cards)
     if user_hand_total <= 21
@@ -112,22 +111,29 @@ loop do
       break
     end
   end
-
   if player_bust == true
-    play_another_game = ask_to_play_again
-    break unless play_another_game.downcase.start_with?('y')
+    play_again_response = ask_to_play_again
+    break unless play_again_response.downcase.start_with?('y')
     next
-  end 
+  end
+
+  puts 'The dealer is making his moves...'
 
   loop do
     dealer_hand_total = calculate_hand(dealer_cards)
-    break if dealer_hand_total >= 17
-    draw_next_card!(playing_deck, dealer_cards)
+    if dealer_hand_total >= 17 && dealer_hand_total <= 21
+      puts 'The dealer decides to stay. Time to reveal who won.'
+      break 
+    elsif dealer_hand_total > 21
+      puts 'The dealer bust! You win!'
+    else
+      puts 'The dealer is going to draw another card.' 
+      draw_next_card!(playing_deck, dealer_cards)
+    end 
   end 
-  p dealer_cards
-  
-  play_another_game = ask_to_play_again
-  break unless play_another_game.downcase.start_with?('y')
+
+  play_again_response = ask_to_play_again
+  break unless play_again_response.downcase.start_with?('y')
 end 
 
 
