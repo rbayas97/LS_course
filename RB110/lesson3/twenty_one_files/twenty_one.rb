@@ -80,6 +80,21 @@ def ask_to_play_again
   answer = gets.chomp
 end 
 
+def determine_winner(player_hand_total, computer_hand_total)
+  player_difference = 21 - player_hand_total
+  computer_difference = 21 - computer_hand_total
+  if player_difference < computer_difference
+    puts "Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}"
+    puts "You won!"
+  elsif computer_difference < player_difference
+    puts "Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}"
+    puts "You lost!"
+  else
+    puts "Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}" 
+    puts "It's a draw!"
+  end 
+end 
+
 loop do 
   playing_deck = initialize_deck
   user_cards = draw_initial_hand!(playing_deck)
@@ -92,7 +107,7 @@ loop do
 
   user_hand_total = 0
   dealer_hand_total = 0
-  player_bust = false
+  bust = false
 
   loop do
     user_hand_total = calculate_hand(user_cards)
@@ -107,16 +122,17 @@ loop do
       end 
     else 
       puts 'BUST! You went over 21!'
-      player_bust = true
+      bust = true
       break
     end
   end
-  if player_bust == true
+  if bust == true
     play_again_response = ask_to_play_again
     break unless play_again_response.downcase.start_with?('y')
     next
   end
 
+  bust = false
   puts 'The dealer is making his moves...'
 
   loop do
@@ -125,12 +141,22 @@ loop do
       puts 'The dealer decides to stay. Time to reveal who won.'
       break 
     elsif dealer_hand_total > 21
+      bust = true
       puts 'The dealer bust! You win!'
+      break
     else
       puts 'The dealer is going to draw another card.' 
       draw_next_card!(playing_deck, dealer_cards)
     end 
-  end 
+  end
+
+  if bust == true
+    play_again_response = ask_to_play_again
+    break unless play_again_response.downcase.start_with?('y')
+    next
+  end
+
+  determine_winner(user_hand_total, dealer_hand_total)
 
   play_again_response = ask_to_play_again
   break unless play_again_response.downcase.start_with?('y')
