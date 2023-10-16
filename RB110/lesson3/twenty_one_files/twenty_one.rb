@@ -81,14 +81,12 @@ end
 def determine_winner(player_hand_total, computer_hand_total)
   player_difference = 21 - player_hand_total
   computer_difference = 21 - computer_hand_total
+  prompt("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}")
   if player_difference < computer_difference
-    prompt("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}")
     prompt("You won!")
   elsif computer_difference < player_difference
-    prompt("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}")
     prompt("You lost!")
   else
-    prompt("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}")
     prompt("It's a draw!")
   end
 end
