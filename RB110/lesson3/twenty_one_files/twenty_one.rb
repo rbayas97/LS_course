@@ -79,7 +79,9 @@ end
 def determine_winner(player_hand_total, computer_hand_total)
   player_difference = 21 - player_hand_total
   computer_difference = 21 - computer_hand_total
-  prompt("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}")
+  puts "================================"
+  puts("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}")
+  puts "================================"
   if player_difference < computer_difference
     prompt("You won!")
   elsif computer_difference < player_difference
@@ -89,12 +91,17 @@ def determine_winner(player_hand_total, computer_hand_total)
   end
 end
 
+player_score = 0
+dealer_score = 0
 loop do
   system 'clear'
   playing_deck = initialize_deck
   user_cards = draw_initial_hand!(playing_deck)
   dealer_cards = draw_initial_hand!(playing_deck)
 
+  puts "================================="
+  puts ("Player Score: #{player_score} | Dealer Score #{dealer_score}")
+  puts "================================="
   prompt("Your Hand:")
   display_cards(user_cards)
   prompt("Dealer Hand:")
@@ -118,6 +125,7 @@ loop do
     else
       prompt('BUST! You went over 21!')
       bust = true
+      dealer_score += 1
       break
     end
     system 'clear'
@@ -131,7 +139,7 @@ loop do
   end
 
   bust = false
-  prompt('The dealer is making his moves...')
+  prompt("Time for the dealer to make their moves...")
 
   loop do
     dealer_hand_total = calculate_hand(dealer_cards)
@@ -140,6 +148,7 @@ loop do
       break
     elsif dealer_hand_total > 21
       bust = true
+      player_score += 1 
       prompt('The dealer bust! You win!')
       break
     else
