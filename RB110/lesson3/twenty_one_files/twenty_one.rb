@@ -34,12 +34,12 @@ def initialize_deck
   deck_count 
 end
 
-def draw_initial_hand!(cards)
+def draw_initial_hand!(deck)
   hand = []
   card = nil
   2.times do 
-    card = cards.keys.sample
-    cards.map { |key, value| cards[key][1] -= 1 if key == card }
+    card = deck.keys.sample
+    deck.map { |key, value| deck[key][1] -= 1 if key == card }
     hand << card
   end 
   hand 
@@ -49,6 +49,7 @@ def draw_next_card!(deck, player_cards)
   card = deck.keys.sample
   player_cards << card
   deck.map { |key, value| deck[key][1] -= 1 if key == card }
+  deck.delete_if{ |_, value| value[1] == 0 }
 end
 
 def determine_ace_value(total, ace)
