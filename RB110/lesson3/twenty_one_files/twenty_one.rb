@@ -73,13 +73,13 @@ def calculate_hand(player_cards)
 end
 
 def ask_to_hit_or_stay(total)
-  puts "Your hand is #{total}"
-  puts "Hit or Stay?"
+  prompt("Your hand is #{total}")
+  prompt("Hit or Stay?")
   gets.chomp.downcase
 end 
 
 def ask_to_play_again
-  puts "Play again? (y or n)"
+  prompt("Play again? (y or n)")
   answer = gets.chomp
 end 
 
@@ -87,14 +87,14 @@ def determine_winner(player_hand_total, computer_hand_total)
   player_difference = 21 - player_hand_total
   computer_difference = 21 - computer_hand_total
   if player_difference < computer_difference
-    puts "Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}"
-    puts "You won!"
+    prompt("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}")
+    prompt("You won!")
   elsif computer_difference < player_difference
-    puts "Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}"
-    puts "You lost!"
+    prompt("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}")
+    prompt("You lost!")
   else
-    puts "Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}" 
-    puts "It's a draw!"
+    prompt("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}" )
+    prompt("It's a draw!")
   end 
 end 
 
@@ -103,9 +103,9 @@ loop do
   user_cards = draw_initial_hand!(playing_deck)
   dealer_cards = draw_initial_hand!(playing_deck)
 
-  puts "Your Hand:"
+  prompt("Your Hand:")
   display_card(user_cards[0], user_cards[1])
-  puts "Dealer Hand:"
+  prompt("Dealer Hand:")
   display_card(dealer_cards[0], '?')
 
   user_hand_total = 0
@@ -121,10 +121,10 @@ loop do
       elsif answer == 'stay'
         break
       else 
-        puts 'Wrong choice. Please enter Hit or Stay?'
+        prompt('Wrong choice. Please enter Hit or Stay?')
       end 
     else 
-      puts 'BUST! You went over 21!'
+      prompt('BUST! You went over 21!')
       bust = true
       break
     end
@@ -136,19 +136,19 @@ loop do
   end
 
   bust = false
-  puts 'The dealer is making his moves...'
+  prompt('The dealer is making his moves...')
 
   loop do
     dealer_hand_total = calculate_hand(dealer_cards)
     if dealer_hand_total >= 17 && dealer_hand_total <= 21
-      puts 'The dealer decides to stay. Time to reveal who won.'
+      prompt('The dealer decides to stay. Time to reveal who won.')
       break 
     elsif dealer_hand_total > 21
       bust = true
-      puts 'The dealer bust! You win!'
+      prompt('The dealer bust! You win!')
       break
     else
-      puts 'The dealer is going to draw another card.' 
+      prompt('The dealer is going to draw another card.' )
       draw_next_card!(playing_deck, dealer_cards)
     end 
   end
