@@ -17,10 +17,10 @@ def prompt(message)
 end
 
 def display_cards(cards)
-   cards.each do |card|
+  cards.each do |card|
     card = "[#{card}]"
     print card
-  end 
+  end
   puts "\n"
 end
 
@@ -90,6 +90,7 @@ def determine_winner(player_hand_total, computer_hand_total)
 end
 
 loop do
+  system 'clear'
   playing_deck = initialize_deck
   user_cards = draw_initial_hand!(playing_deck)
   dealer_cards = draw_initial_hand!(playing_deck)
@@ -97,7 +98,7 @@ loop do
   prompt("Your Hand:")
   display_cards(user_cards)
   prompt("Dealer Hand:")
-  display_cards(dealer_cards)
+  display_cards([dealer_cards[0],'?'])
 
   user_hand_total = 0
   dealer_hand_total = 0
@@ -119,8 +120,10 @@ loop do
       bust = true
       break
     end
+    system 'clear'
     display_cards(user_cards)
   end
+
   if bust == true
     play_again_response = ask_to_play_again
     break unless play_again_response.downcase.start_with?('y')
@@ -133,7 +136,7 @@ loop do
   loop do
     dealer_hand_total = calculate_hand(dealer_cards)
     if dealer_hand_total >= 17 && dealer_hand_total <= 21
-      prompt('The dealer decides to stay. Time to reveal who won.')
+      prompt('The dealer stays. Time to reveal who won.')
       break
     elsif dealer_hand_total > 21
       bust = true
@@ -143,6 +146,7 @@ loop do
       prompt('The dealer is going to draw another card.')
       draw_next_card!(playing_deck, dealer_cards)
     end
+    display_cards(dealer_cards)
   end
 
   if bust == true
