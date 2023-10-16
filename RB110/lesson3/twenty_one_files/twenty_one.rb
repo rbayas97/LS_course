@@ -77,14 +77,12 @@ def ask_to_play_again
 end
 
 def determine_winner(player_hand_total, computer_hand_total)
-  player_difference = 21 - player_hand_total
-  computer_difference = 21 - computer_hand_total
   puts "================================"
   puts("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}")
   puts "================================"
-  if player_difference < computer_difference
+  if player_hand_total > computer_hand_total
     prompt("You won!")
-  elsif computer_difference < player_difference
+  elsif player_hand_total < computer_hand_total
     prompt("You lost!")
   else
     prompt("It's a draw!")
