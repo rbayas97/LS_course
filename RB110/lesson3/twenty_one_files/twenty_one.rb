@@ -77,9 +77,7 @@ def ask_to_play_again
 end
 
 def determine_winner(player_hand_total, computer_hand_total)
-  puts "================================"
-  puts("Your hand: #{player_hand_total}, Dealer hand: #{computer_hand_total}")
-  puts "================================"
+  display_info(player_hand_total, computer_hand_total)
   if player_hand_total > computer_hand_total
     prompt("You won!")
   elsif player_hand_total < computer_hand_total
@@ -89,6 +87,12 @@ def determine_winner(player_hand_total, computer_hand_total)
   end
 end
 
+def display_info(player_info, computer_info)
+  puts "================================"
+  puts("Your hand: #{player_info}, Dealer hand: #{computer_info}")
+  puts "================================"
+end 
+
 player_score = 0
 dealer_score = 0
 loop do
@@ -97,9 +101,7 @@ loop do
   user_cards = draw_initial_hand!(playing_deck)
   dealer_cards = draw_initial_hand!(playing_deck)
 
-  puts "================================="
-  puts ("Player Score: #{player_score} | Dealer Score #{dealer_score}")
-  puts "================================="
+  display_info(player_score, dealer_score)
   prompt("Your Hand:")
   display_cards(user_cards)
   prompt("Dealer Hand:")
