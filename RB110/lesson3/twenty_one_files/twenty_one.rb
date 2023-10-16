@@ -91,6 +91,10 @@ def display_info(player_info, computer_info)
   puts "================================"
   puts("Your hand: #{player_info}, Dealer hand: #{computer_info}")
   puts "================================"
+end
+
+def add_point(player1_total, player2_total)
+  player1_total > player2_total ? 1 : 0
 end 
 
 player_score = 0
@@ -105,7 +109,7 @@ loop do
   prompt("Your Hand:")
   display_cards(user_cards)
   prompt("Dealer Hand:")
-  display_cards([dealer_cards[0],'?'])
+  display_cards([dealer_cards[0], '?'])
 
   user_hand_total = 0
   dealer_hand_total = 0
@@ -148,7 +152,7 @@ loop do
       break
     elsif dealer_hand_total > 21
       bust = true
-      player_score += 1 
+      player_score += 1
       prompt('The dealer bust! You win!')
       break
     else
@@ -165,6 +169,8 @@ loop do
   end
 
   determine_winner(user_hand_total, dealer_hand_total)
+  player_score += add_point(user_hand_total, dealer_hand_total)
+  dealer_score += add_point(dealer_hand_total, user_hand_total)
 
   play_again_response = ask_to_play_again
   break unless play_again_response.downcase.start_with?('y')
