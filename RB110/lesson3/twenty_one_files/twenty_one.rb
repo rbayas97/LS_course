@@ -16,14 +16,12 @@ def prompt(message)
   puts "=> #{message}"
 end
 
-def display_card(card1, card2)
-  spaces = card1.to_s.length == 1 ? 3 : 2
-  spaces_2 = card2.to_s.length == 1 ? 3 : 2
-  puts '+-------+'                        + ' ' +  '+-------+'
-  puts '|       |'                        + ' ' +  '|       |'
-  puts "|   #{card1}" + ' ' * spaces +'|' + ' ' +  "|   #{card2}" + ' ' * spaces_2 + '|'
-  puts '|       |'                        + ' ' +  '|       |'                       
-  puts '+-------+'                        + ' ' +  '+-------+'
+def display_cards(cards)
+   cards.each do |card|
+    card = "[#{card}]"
+    print card
+  end 
+  puts "\n"
 end
 
 def initialize_deck
@@ -97,9 +95,9 @@ loop do
   dealer_cards = draw_initial_hand!(playing_deck)
 
   prompt("Your Hand:")
-  display_card(user_cards[0], user_cards[1])
+  display_cards(user_cards)
   prompt("Dealer Hand:")
-  display_card(dealer_cards[0], '?')
+  display_cards(dealer_cards)
 
   user_hand_total = 0
   dealer_hand_total = 0
@@ -121,6 +119,7 @@ loop do
       bust = true
       break
     end
+    display_cards(user_cards)
   end
   if bust == true
     play_again_response = ask_to_play_again
