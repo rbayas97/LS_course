@@ -105,15 +105,13 @@ end
 
 def determine_winner(player_score, dealer_score)
   if player_score == 5 || dealer_score == 5
+    puts "****************************************"
     if player_score == 5
-      puts "========================================"
       prompt("You won! You beat the dealer 5 times")
-      puts "========================================"
     else
-      puts "========================================"
       prompt("You lost! The dealer beat you 5 times")
-      puts "========================================"
     end
+    puts "****************************************"
   end
 end
 
