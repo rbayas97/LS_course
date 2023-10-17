@@ -76,7 +76,7 @@ def ask_to_play_again
   gets.chomp
 end
 
-def determine_winner(player_hand_total, computer_hand_total)
+def determine_round(player_hand_total, computer_hand_total)
   display_end_of_round(player_hand_total, computer_hand_total)
   if player_hand_total > computer_hand_total
     prompt("You won!")
@@ -175,7 +175,7 @@ loop do
     next
   end
 
-  determine_winner(user_hand_total, dealer_hand_total)
+  determine_round(user_hand_total, dealer_hand_total)
   player_score += add_point(user_hand_total, dealer_hand_total)
   dealer_score += add_point(dealer_hand_total, user_hand_total)
 
