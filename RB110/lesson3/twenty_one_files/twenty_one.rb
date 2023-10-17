@@ -77,7 +77,7 @@ def ask_to_play_again
 end
 
 def determine_winner(player_hand_total, computer_hand_total)
-  display_info(player_hand_total, computer_hand_total)
+  display_end_of_round(player_hand_total, computer_hand_total)
   if player_hand_total > computer_hand_total
     prompt("You won!")
   elsif player_hand_total < computer_hand_total
@@ -87,11 +87,17 @@ def determine_winner(player_hand_total, computer_hand_total)
   end
 end
 
-def display_info(player_info, computer_info)
+def display_end_of_round(player_info, dealer_info)
   puts "================================"
-  puts("Your hand: #{player_info}, Dealer hand: #{computer_info}")
+  puts("Your hand: #{player_info}, Dealer hand: #{dealer_info}")
   puts "================================"
 end
+
+def display_score(player_score, dealer_score)
+  puts "================================"
+  puts("Your score: #{player_score}, Dealer score: #{dealer_score}")
+  puts "================================"
+end 
 
 def add_point(player1_total, player2_total)
   player1_total > player2_total ? 1 : 0
@@ -99,13 +105,14 @@ end
 
 player_score = 0
 dealer_score = 0
+
 loop do
   system 'clear'
   playing_deck = initialize_deck
   user_cards = draw_initial_hand!(playing_deck)
   dealer_cards = draw_initial_hand!(playing_deck)
 
-  display_info(player_score, dealer_score)
+  display_score(player_score, dealer_score)
   prompt("Your Hand:")
   display_cards(user_cards)
   prompt("Dealer Hand:")
