@@ -101,6 +101,20 @@ end
 
 def add_point(player1_total, player2_total)
   player1_total > player2_total ? 1 : 0
+end
+
+def determine_winner(player_score, dealer_score)
+  if player_score == 5 || dealer_score == 5
+    if player_score == 5
+      prompt ("You won! You beat the dealer 5 times")
+    else 
+      prompt ("You lost! The dealer beat you 5 times")
+    end 
+  end 
+end
+
+def winner?(player_score, dealer_score)
+  player_score == 5 || dealer_score == 5
 end 
 
 player_score = 0
@@ -144,9 +158,13 @@ loop do
   end
 
   if bust == true
-    play_again_response = ask_to_play_again
-    break unless play_again_response.downcase.start_with?('y')
-    next
+    if winner?(player_score, dealer_score)
+      break
+    else 
+      play_again_response = ask_to_play_again
+      break unless play_again_response.downcase.start_with?('y')
+      next
+    end 
   end
 
   bust = false
@@ -170,14 +188,21 @@ loop do
   end
 
   if bust == true
-    play_again_response = ask_to_play_again
-    break unless play_again_response.downcase.start_with?('y')
-    next
+    if winner?(player_score, dealer_score)
+      break
+    else
+      play_again_response = ask_to_play_again
+      break unless play_again_response.downcase.start_with?('y')
+      next
+    end 
   end
 
   determine_round(user_hand_total, dealer_hand_total)
   player_score += add_point(user_hand_total, dealer_hand_total)
   dealer_score += add_point(dealer_hand_total, user_hand_total)
+
+  determine_winner(player_score, dealer_score)
+  break if winner?(player_score, dealer_score)
 
   play_again_response = ask_to_play_again
   break unless play_again_response.downcase.start_with?('y')
