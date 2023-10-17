@@ -103,7 +103,7 @@ def add_point(player1_total, player2_total)
   player1_total > player2_total ? 1 : 0
 end
 
-def determine_winner(player_score, dealer_score)
+def determine_overall_winner(player_score, dealer_score)
   if player_score == 5 || dealer_score == 5
     puts "****************************************"
     if player_score == 5
@@ -161,7 +161,7 @@ loop do
 
   if bust == true
     if winner?(player_score, dealer_score)
-      determine_winner(player_score, dealer_score)
+      determine_overall_winner(player_score, dealer_score)
       break
     else
       play_again_response = ask_to_play_again
@@ -192,7 +192,7 @@ loop do
 
   if bust == true
     if winner?(player_score, dealer_score)
-      determine_winner(player_score, dealer_score)
+      determine_overall_winner(player_score, dealer_score)
       break
     else
       play_again_response = ask_to_play_again
@@ -205,7 +205,7 @@ loop do
   player_score += add_point(user_hand_total, dealer_hand_total)
   dealer_score += add_point(dealer_hand_total, user_hand_total)
 
-  determine_winner(player_score, dealer_score)
+  determine_overall_winner(player_score, dealer_score)
   break if winner?(player_score, dealer_score)
 
   play_again_response = ask_to_play_again
