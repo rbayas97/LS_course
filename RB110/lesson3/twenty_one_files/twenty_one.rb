@@ -97,7 +97,7 @@ def display_score(player_score, dealer_score)
   puts "================================"
   puts("Your score: #{player_score}, Dealer score: #{dealer_score}")
   puts "================================"
-end 
+end
 
 def add_point(player1_total, player2_total)
   player1_total > player2_total ? 1 : 0
@@ -107,19 +107,19 @@ def determine_winner(player_score, dealer_score)
   if player_score == 5 || dealer_score == 5
     if player_score == 5
       puts "========================================"
-      prompt ("You won! You beat the dealer 5 times")
+      prompt("You won! You beat the dealer 5 times")
       puts "========================================"
-    else 
+    else
       puts "========================================"
-      prompt ("You lost! The dealer beat you 5 times")
+      prompt("You lost! The dealer beat you 5 times")
       puts "========================================"
-    end 
-  end 
+    end
+  end
 end
 
 def winner?(player_score, dealer_score)
   player_score == 5 || dealer_score == 5
-end 
+end
 
 player_score = 0
 dealer_score = 0
@@ -165,11 +165,11 @@ loop do
     if winner?(player_score, dealer_score)
       determine_winner(player_score, dealer_score)
       break
-    else 
+    else
       play_again_response = ask_to_play_again
       break unless play_again_response.downcase.start_with?('y')
       next
-    end 
+    end
   end
 
   bust = false
@@ -200,7 +200,7 @@ loop do
       play_again_response = ask_to_play_again
       break unless play_again_response.downcase.start_with?('y')
       next
-    end 
+    end
   end
 
   determine_round(user_hand_total, dealer_hand_total)
