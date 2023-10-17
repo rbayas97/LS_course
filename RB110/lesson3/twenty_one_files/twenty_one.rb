@@ -106,9 +106,13 @@ end
 def determine_winner(player_score, dealer_score)
   if player_score == 5 || dealer_score == 5
     if player_score == 5
+      puts "========================================"
       prompt ("You won! You beat the dealer 5 times")
+      puts "========================================"
     else 
+      puts "========================================"
       prompt ("You lost! The dealer beat you 5 times")
+      puts "========================================"
     end 
   end 
 end
@@ -159,6 +163,7 @@ loop do
 
   if bust == true
     if winner?(player_score, dealer_score)
+      determine_winner(player_score, dealer_score)
       break
     else 
       play_again_response = ask_to_play_again
@@ -189,6 +194,7 @@ loop do
 
   if bust == true
     if winner?(player_score, dealer_score)
+      determine_winner(player_score, dealer_score)
       break
     else
       play_again_response = ask_to_play_again
