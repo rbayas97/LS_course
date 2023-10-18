@@ -12,6 +12,9 @@ DECK_VALUES = { 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8,
                 9 => 9, 10 => 10, 'J' => 10, 'Q' => 10, 'K' => 10,
                 'A' => 11 }
 
+GAME_TOTAL_VALUE = 31
+DEALER_STAY_VALUE = GAME_TOTAL_VALUE - 4
+
 def prompt(message)
   puts "=> #{message}"
 end
@@ -49,7 +52,7 @@ def draw_next_card!(deck, player_cards)
 end
 
 def determine_ace_value(total, ace)
-  total + DECK_VALUES[ace] <= 21 ? 11 : 1
+  total + DECK_VALUES[ace] <= GAME_TOTAL_VALUE ? 11 : 1
 end
 
 def calculate_hand(player_cards)
@@ -140,7 +143,7 @@ loop do
 
   loop do
     user_hand_total = calculate_hand(user_cards)
-    if user_hand_total <= 21
+    if user_hand_total <= GAME_TOTAL_VALUE
       answer = ask_to_hit_or_stay(user_hand_total)
       if answer == 'hit'
         draw_next_card!(playing_deck, user_cards)
@@ -150,7 +153,7 @@ loop do
         prompt('Wrong choice. Please enter Hit or Stay?')
       end
     else
-      prompt('BUST! You went over 21!')
+      prompt("BUST! You went over #{GAME_TOTAL_VALUE}!")
       bust = true
       dealer_score += 1
       break
@@ -175,10 +178,10 @@ loop do
 
   loop do
     dealer_hand_total = calculate_hand(dealer_cards)
-    if dealer_hand_total >= 17 && dealer_hand_total <= 21
+    if dealer_hand_total >= DEALER_STAY_VALUE && dealer_hand_total <= GAME_TOTAL_VALUE
       prompt('The dealer stays. Time to reveal who won.')
       break
-    elsif dealer_hand_total > 21
+    elsif dealer_hand_total > GAME_TOTAL_VALUE
       bust = true
       player_score += 1
       prompt('The dealer bust! You win!')
